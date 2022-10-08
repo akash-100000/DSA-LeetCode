@@ -2,14 +2,22 @@ class Solution {
 public:
     vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
         vector<int> v;
-        for(int i = 0; i<nums1.size(); i++){
-            for(int j = 0; j<nums2.size(); j++){
-                if(nums1[i]==nums2[j]){
-                    v.push_back(nums1[i]);
-                }
+        int i = 0; 
+        int j = 0;
+        sort(nums1.begin(),nums1.end());
+        sort(nums2.begin(),nums2.end());
+        while(i<nums1.size() && j<nums2.size()){
+            if(nums1[i]<nums2[j]){
+                i++;
+            }else if(nums2[j]<nums1[i]){
+                j++;
+            }else{
+                v.push_back(nums1[i]);
+                i++;
+                j++;
             }
         }
-        sort(v.begin(),v.end());
+        
         v.erase(unique(v.begin(),v.end()),v.end());
         return v;
     }
